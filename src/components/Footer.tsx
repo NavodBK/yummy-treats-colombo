@@ -47,7 +47,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
-          <div>
+          <div className="animate-fade-in">
             <h3 className="text-2xl font-serif font-bold mb-4">
               Yummy Treats<span className="text-primary">CMB</span>
             </h3>
@@ -57,14 +57,15 @@ const Footer = () => {
             </p>
             {/* Social Links */}
             <div className="flex gap-3">
-              {socialLinks.map((social) => (
+              {socialLinks.map((social, index) => (
                 <a
                   key={social.name}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-background/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110"
+                  className="w-10 h-10 bg-background/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110 hover:rotate-6"
                   aria-label={social.name}
+                  style={{ animationDelay: `${index * 50}ms` }}
                 >
                   {social.icon}
                 </a>
