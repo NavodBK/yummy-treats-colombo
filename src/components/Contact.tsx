@@ -1,5 +1,6 @@
 import { Phone, MapPin, Clock, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const socialLinks = [
   {
@@ -38,10 +39,19 @@ const Contact = () => {
   const phoneNumber = "0781539664";
   const whatsappLink = `https://wa.me/94781539664?text=${encodeURIComponent("Hi! I'd like to place an order from Yummy Treats CMB.")}`;
 
+  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
+  const { ref: cardsRef, isVisible: cardsVisible } = useScrollAnimation();
+  const { ref: ctaRef, isVisible: ctaVisible } = useScrollAnimation();
+
   return (
     <section id="contact" className="py-20 bg-secondary/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-fade-in">
+        <div 
+          ref={headerRef}
+          className={`text-center mb-16 transition-all duration-700 ${
+            headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
           <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
             Get In Touch
           </span>
@@ -54,50 +64,77 @@ const Contact = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div 
+          ref={cardsRef}
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+        >
           {/* Phone */}
-          <div className="bg-card p-6 rounded-lg border border-border text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
-            <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-              <Phone className="h-6 w-6 text-primary group-hover:text-primary-foreground" />
+          <div 
+            className="bg-card p-6 rounded-lg border border-border text-center hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:scale-105 group"
+            style={{
+              animationDelay: '0ms',
+              animation: cardsVisible ? 'fade-up 0.6s ease-out forwards' : 'none',
+            }}
+          >
+            <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:scale-110">
+              <Phone className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors" />
             </div>
             <h3 className="font-semibold text-foreground mb-2">Call Us</h3>
             <a
               href={`tel:${phoneNumber}`}
-              className="text-primary hover:underline font-medium"
+              className="text-primary hover:underline font-medium transition-colors"
             >
               {phoneNumber}
             </a>
           </div>
 
           {/* WhatsApp */}
-          <div className="bg-card p-6 rounded-lg border border-border text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
-            <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-              <MessageCircle className="h-6 w-6 text-primary group-hover:text-primary-foreground" />
+          <div 
+            className="bg-card p-6 rounded-lg border border-border text-center hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:scale-105 group"
+            style={{
+              animationDelay: '100ms',
+              animation: cardsVisible ? 'fade-up 0.6s ease-out forwards' : 'none',
+            }}
+          >
+            <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:scale-110">
+              <MessageCircle className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors" />
             </div>
             <h3 className="font-semibold text-foreground mb-2">WhatsApp</h3>
             <a
               href={whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary hover:underline font-medium"
+              className="text-primary hover:underline font-medium transition-colors"
             >
               Message Us
             </a>
           </div>
 
           {/* Location */}
-          <div className="bg-card p-6 rounded-lg border border-border text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
-            <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-              <MapPin className="h-6 w-6 text-primary group-hover:text-primary-foreground" />
+          <div 
+            className="bg-card p-6 rounded-lg border border-border text-center hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:scale-105 group"
+            style={{
+              animationDelay: '200ms',
+              animation: cardsVisible ? 'fade-up 0.6s ease-out forwards' : 'none',
+            }}
+          >
+            <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:scale-110">
+              <MapPin className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors" />
             </div>
             <h3 className="font-semibold text-foreground mb-2">Location</h3>
             <p className="text-muted-foreground">Pita Kotte, Colombo</p>
           </div>
 
           {/* Delivery */}
-          <div className="bg-card p-6 rounded-lg border border-border text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group">
-            <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-              <Clock className="h-6 w-6 text-primary group-hover:text-primary-foreground" />
+          <div 
+            className="bg-card p-6 rounded-lg border border-border text-center hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:scale-105 group"
+            style={{
+              animationDelay: '300ms',
+              animation: cardsVisible ? 'fade-up 0.6s ease-out forwards' : 'none',
+            }}
+          >
+            <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 group-hover:scale-110">
+              <Clock className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors" />
             </div>
             <h3 className="font-semibold text-foreground mb-2">Delivery</h3>
             <p className="text-muted-foreground">All Colombo Areas</p>
@@ -108,14 +145,18 @@ const Contact = () => {
         <div className="text-center mb-12">
           <p className="text-muted-foreground mb-4">Follow us on social media</p>
           <div className="flex justify-center gap-4">
-            {socialLinks.map((social) => (
+            {socialLinks.map((social, index) => (
               <a
                 key={social.name}
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`w-12 h-12 bg-card border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-primary-foreground transition-all duration-300 hover:scale-110 ${social.color}`}
+                className={`w-12 h-12 bg-card border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-primary-foreground transition-all duration-300 hover:scale-110 hover:rotate-6 ${social.color}`}
                 aria-label={social.name}
+                style={{
+                  animationDelay: `${index * 50}ms`,
+                  animation: cardsVisible ? 'scale-in 0.5s ease-out forwards' : 'none',
+                }}
               >
                 {social.icon}
               </a>
@@ -124,7 +165,12 @@ const Contact = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-primary rounded-2xl p-8 md:p-12 text-center animate-fade-in">
+        <div 
+          ref={ctaRef}
+          className={`bg-primary rounded-2xl p-8 md:p-12 text-center transition-all duration-700 ${
+            ctaVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+          }`}
+        >
           <h3 className="text-2xl md:text-3xl font-serif font-bold text-primary-foreground mb-4">
             Ready to Make Your Event Sweet?
           </h3>
@@ -137,7 +183,7 @@ const Contact = () => {
               asChild
               size="lg"
               variant="secondary"
-              className="text-lg px-8 hover:scale-105 transition-transform"
+              className="text-lg px-8 hover:scale-105 transition-all duration-300 hover:shadow-lg"
             >
               <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="mr-2 h-5 w-5" />
@@ -148,7 +194,7 @@ const Contact = () => {
               asChild
               size="lg"
               variant="outline"
-              className="text-lg px-8 bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:scale-105 transition-transform"
+              className="text-lg px-8 bg-transparent border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 hover:scale-105 transition-all duration-300 hover:shadow-lg"
             >
               <a href={`tel:${phoneNumber}`}>
                 <Phone className="mr-2 h-5 w-5" />

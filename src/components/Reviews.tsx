@@ -1,4 +1,5 @@
 import { Star, Quote } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const reviews = [
   {
@@ -40,10 +41,17 @@ const reviews = [
 ];
 
 const Reviews = () => {
+  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
+
   return (
     <section id="reviews" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animate-fade-in">
+        <div 
+          ref={headerRef}
+          className={`text-center mb-16 transition-all duration-700 ${
+            headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
           <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
             Testimonials
           </span>
@@ -60,22 +68,26 @@ const Reviews = () => {
           {reviews.map((review, index) => (
             <div
               key={review.name}
-              className="bg-card p-6 rounded-xl border border-border hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="bg-card p-6 rounded-xl border border-border hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:scale-105 group"
+              style={{
+                animationDelay: `${index * 100}ms`,
+                animation: headerVisible ? 'fade-up 0.8s ease-out forwards' : 'none',
+              }}
             >
               <div className="flex items-center justify-between mb-4">
-                <Quote className="h-8 w-8 text-primary/30 group-hover:text-primary/50 transition-colors" />
+                <Quote className="h-8 w-8 text-primary/30 group-hover:text-primary transition-all duration-300 group-hover:scale-110" />
                 <div className="flex gap-1">
                   {[...Array(review.rating)].map((_, i) => (
                     <Star
                       key={i}
-                      className="h-4 w-4 fill-primary text-primary"
+                      className="h-4 w-4 fill-primary text-primary group-hover:scale-110 transition-transform duration-300"
+                      style={{ animationDelay: `${i * 50}ms` }}
                     />
                   ))}
                 </div>
               </div>
               
-              <p className="text-muted-foreground mb-4 leading-relaxed">
+              <p className="text-muted-foreground mb-4 leading-relaxed group-hover:text-foreground transition-colors duration-300">
                 "{review.text}"
               </p>
               

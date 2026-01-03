@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const faqItems = [
   {
@@ -49,10 +50,18 @@ const faqItems = [
 ];
 
 const FAQ = () => {
+  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation();
+  const { ref: accordionRef, isVisible: accordionVisible } = useScrollAnimation();
+
   return (
     <section id="faq" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div 
+          ref={headerRef}
+          className={`text-center mb-16 transition-all duration-700 ${
+            headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
           <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
             FAQ
           </span>
@@ -65,15 +74,24 @@ const FAQ = () => {
           </p>
         </div>
 
-        <div className="max-w-3xl mx-auto">
+        <div 
+          ref={accordionRef}
+          className={`max-w-3xl mx-auto transition-all duration-700 ${
+            accordionVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
           <Accordion type="single" collapsible className="w-full space-y-4">
             {faqItems.map((item, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="bg-card border border-border rounded-lg px-6 data-[state=open]:shadow-md transition-shadow"
+                className="bg-card border border-border rounded-lg px-6 data-[state=open]:shadow-lg transition-all duration-300 hover:shadow-md"
+                style={{
+                  animationDelay: `${index * 50}ms`,
+                  animation: accordionVisible ? 'fade-up 0.6s ease-out forwards' : 'none',
+                }}
               >
-                <AccordionTrigger className="text-left font-medium text-foreground hover:text-primary hover:no-underline py-5">
+                <AccordionTrigger className="text-left font-medium text-foreground hover:text-primary hover:no-underline py-5 transition-colors duration-300">
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
@@ -92,7 +110,7 @@ const FAQ = () => {
                 const element = document.getElementById("contact");
                 if (element) element.scrollIntoView({ behavior: "smooth" });
               }}
-              className="text-primary font-medium hover:underline"
+              className="text-primary font-medium hover:underline transition-all duration-300 hover:scale-105 inline-block"
             >
               Contact us directly
             </button>

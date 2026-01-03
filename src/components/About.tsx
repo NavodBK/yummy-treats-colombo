@@ -1,4 +1,5 @@
 import { Heart, Sparkles, Truck, Award } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const features = [
   {
@@ -24,12 +25,20 @@ const features = [
 ];
 
 const About = () => {
+  const { ref: leftRef, isVisible: leftVisible } = useScrollAnimation();
+  const { ref: rightRef, isVisible: rightVisible } = useScrollAnimation();
+
   return (
     <section id="about" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left content */}
-          <div>
+          <div
+            ref={leftRef}
+            className={`transition-all duration-700 ${
+              leftVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+            }`}
+          >
             <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
               About Us
             </span>
@@ -38,7 +47,7 @@ const About = () => {
             </h2>
             
             {/* Mission Statement */}
-            <div className="bg-secondary/50 rounded-lg p-6 mb-8 border-l-4 border-primary">
+            <div className="bg-secondary/50 rounded-lg p-6 mb-8 border-l-4 border-primary hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
               <h3 className="font-semibold text-foreground mb-2">Our Mission</h3>
               <p className="text-muted-foreground italic">
                 "To create unforgettable sweet experiences that bring joy to every celebration. 
@@ -57,14 +66,23 @@ const About = () => {
           </div>
 
           {/* Right features grid */}
-          <div className="grid sm:grid-cols-2 gap-6">
-            {features.map((feature) => (
+          <div 
+            ref={rightRef}
+            className={`grid sm:grid-cols-2 gap-6 transition-all duration-700 ${
+              rightVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+            }`}
+          >
+            {features.map((feature, index) => (
               <div
                 key={feature.title}
-                className="bg-card p-6 rounded-lg border border-border hover:shadow-md transition-shadow"
+                className="bg-card p-6 rounded-lg border border-border hover:shadow-lg transition-all duration-300 hover:-translate-y-2 hover:scale-105"
+                style={{
+                  animationDelay: `${index * 100}ms`,
+                  animation: rightVisible ? 'fade-up 0.6s ease-out forwards' : 'none',
+                }}
               >
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <feature.icon className="h-6 w-6 text-primary" />
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary transition-colors duration-300">
+                  <feature.icon className="h-6 w-6 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
                 </div>
                 <h3 className="font-semibold text-foreground mb-2">{feature.title}</h3>
                 <p className="text-sm text-muted-foreground">{feature.description}</p>
