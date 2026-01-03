@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,9 +36,12 @@ const Header = () => {
         <div className="flex items-center justify-between py-4">
           <button 
             onClick={() => scrollToSection("hero")}
-            className="text-2xl font-serif font-bold text-primary hover:opacity-80 transition-opacity"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           >
-            Yummy Treats<span className="text-accent">CMB</span>
+            <img src={logo} alt="Yummy Treats CMB" className="h-12 w-12 rounded-full" />
+            <span className="text-xl font-serif font-bold text-primary hidden sm:inline">
+              Yummy Treats<span className="text-accent">CMB</span>
+            </span>
           </button>
 
           {/* Desktop Navigation */}
