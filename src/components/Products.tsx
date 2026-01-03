@@ -1,8 +1,9 @@
 import ProductCard from "./ProductCard";
 import weddingCake from "@/assets/wedding-cake.jpg";
-import birthdayCake from "@/assets/birthday-cake.jpg";
-import anniversaryCake from "@/assets/anniversary-cake.jpg";
-import cookies from "@/assets/cookies.jpg";
+import birthdayCake from "@/assets/birthday-cake-real.jpg";
+import birthdayCakeDark from "@/assets/birthday-cake-dark.jpg";
+import chocoFusionCookies from "@/assets/choco-fusion-cookies.jpg";
+import cupcakes from "@/assets/cupcakes.jpg";
 import miniDesserts from "@/assets/mini-desserts.jpg";
 
 const products = [
@@ -19,16 +20,22 @@ const products = [
     category: "Cakes",
   },
   {
-    image: anniversaryCake,
+    image: birthdayCakeDark,
     title: "Anniversary Cakes",
     description: "Romantic designs to celebrate your love story. Hearts, flowers, and sweet memories baked in.",
     category: "Cakes",
   },
   {
-    image: cookies,
-    title: "Artisan Cookies",
-    description: "Classic butter cookies and rich Choco Fusion varieties. Perfect for gifting or treating yourself.",
+    image: chocoFusionCookies,
+    title: "Choco Fusion Cookies",
+    description: "Rich, decadent chocolate cookies with white chocolate chips. Sweetness you can't stop at one bite!",
     category: "Cookies",
+  },
+  {
+    image: cupcakes,
+    title: "Cupcakes",
+    description: "Beautifully frosted cupcakes in various flavors. Perfect for birthdays, parties, and special occasions.",
+    category: "Mini Desserts",
   },
   {
     image: miniDesserts,
