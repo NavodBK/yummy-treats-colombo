@@ -16,11 +16,11 @@ const galleryImages = [
   { src: weddingCakeRoses, alt: "Elegant wedding cake with roses", category: "Wedding" },
   { src: galleryBunnyCake, alt: "Cute bunny birthday cake", category: "Birthday" },
   { src: chococake, alt: "Chocolate drip birthday cake", category: "Birthday" },
-  { src: carCake, alt: "Beautiful baby shower setup", category: "Baby Shower" },
+  { src: carCake, alt: "Beautiful baby shower setup", category: "Birthday" },
   { src: galleryWelcomeBaby, alt: "Welcome baby cake with cupcakes", category: "Baby Shower" },
   { src: galleryDadCake, alt: "Father's birthday cake", category: "Birthday" },
-  { src: platter, alt: "Dessert platter with donuts and cake pops", category: "Platters" },
-  { src: brownies, alt: "Cupcakes and macarons display", category: "Platters" },
+  { src: platter, alt: "Dessert platter with donuts and cake pops", category: "mini desserts" },
+  { src: brownies, alt: "Rich chocolate brownies", category: "brownies" },
   { src: cakepops, alt: "Chocolate cake pops with sprinkles", category: "Mini Desserts" },
 ];
 
